@@ -17,7 +17,7 @@
 #![forbid(unsafe_code)]
 #![warn(missing_docs)]
 
-pub use embedded_hal::digital::v2::OutputPin;
+pub use embedded_hal::digital::OutputPin;
 
 /// Type erased definitions
 pub mod erased {
@@ -223,6 +223,10 @@ where
 
 #[cfg(test)]
 mod tests {
+    use core::convert::Infallible;
+
+    use embedded_hal::digital::ErrorType;
+
     fn test_digit(digit: u8, expected: (u8, u8, u8, u8, u8, u8, u8)) {
         struct TestPin(u8);
 
@@ -240,8 +244,6 @@ mod tests {
         }
 
         impl super::OutputPin for &'_ mut TestPin {
-            type Error = core::convert::Infallible;
-
             fn set_high(&mut self) -> Result<(), Self::Error> {
                 (*self).0 = 1;
                 Ok(())
@@ -251,6 +253,10 @@ mod tests {
                 (*self).0 = 0;
                 Ok(())
             }
+        }
+
+        impl ErrorType for &'_ mut TestPin {
+            type Error = Infallible;
         }
 
         // We're using 2 to signal uninitialized;

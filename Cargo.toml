@@ -4,11 +4,11 @@ version = "0.2.1"
 authors = ["Martin Habovstiak <martin.habovstiak@gmail.com>"]
 edition = "2018"
 description = "A simple driver for seven segment displays"
-categories = [ "embedded", "no-std" ]
-keywords = [ "display", "embedded", "hal" ]
+categories = ["embedded", "no-std"]
+keywords = ["display", "embedded", "hal"]
 license = "MITNFA"
 readme = "README.md"
 repository = "https://github.com/Kixunil/seven_segment"
 
 [dependencies]
-embedded-hal = "0.2.3"
+embedded-hal = "1.0.0"
